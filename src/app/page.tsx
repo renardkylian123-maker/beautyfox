@@ -1,69 +1,200 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getFeaturedServices } from "@/lib/services";
+import { siteConfig } from "@/lib/site-config";
+import { formatDuration, formatPrice } from "@/lib/format";
+import { Section, Kicker } from "@/components/section";
+import { Reveal } from "@/components/reveal";
+import { LeafIcon, RippleIcon, HandsIcon } from "@/components/icons";
 
-export default function Home() {
+export default function HomePage() {
+  const featured = getFeaturedServices(4);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* HERO */}
+      <Section className="relative overflow-hidden pt-16 pb-24 md:pt-24 md:pb-32">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 -right-40 h-[32rem] w-[32rem] rounded-full opacity-40 blur-3xl"
+          style={{ background: "radial-gradient(circle, var(--color-clay) 0%, transparent 70%)" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+        <div className="grid items-center gap-14 md:grid-cols-[1.1fr_0.9fr] md:gap-10">
+          <Reveal as="div">
+            <Kicker>{siteConfig.tagline}</Kicker>
+            <h1 className="mt-6 font-display text-5xl leading-[1.05] text-ink sm:text-6xl md:text-[3.6rem]">
+              Retrouvez <span className="italic text-clay">l&apos;essentiel</span>,
+              <br /> un soin à la fois.
+            </h1>
+            <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-ink-soft">
+              {siteConfig.description}
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <Link
+                href="/reserver"
+                className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm tracking-wide text-cream transition-colors hover:bg-clay"
+              >
+                Réserver un soin
+              </Link>
+              <Link
+                href="/prestations"
+                className="inline-flex items-center gap-2 border-b border-ink/30 pb-1 text-sm tracking-wide text-ink transition-colors hover:border-clay hover:text-clay"
+              >
+                Découvrir les prestations
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal as="div" delay={150} className="relative mx-auto w-full max-w-sm">
+            <div
+              className="aspect-[4/5] w-full rounded-t-[10rem] rounded-b-3xl border border-gold/40 shadow-[0_30px_60px_-25px_rgba(42,35,32,0.35)]"
+              style={{
+                background:
+                  "linear-gradient(155deg, var(--color-forest) 0%, var(--color-ink) 55%, var(--color-clay-deep) 100%)",
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="absolute -bottom-6 -left-6 rounded-2xl border border-ink/10 bg-paper px-6 py-4 shadow-lg">
+              <p className="font-display text-2xl text-clay">9</p>
+              <p className="text-xs tracking-wide text-ink-soft">rituels sur-mesure</p>
+            </div>
+          </Reveal>
         </div>
-      </main>
-    </div>
+      </Section>
+
+      {/* PHILOSOPHY */}
+      <Section tone="deep" className="py-24">
+        <Reveal>
+          <div className="grid gap-10 md:grid-cols-[auto_1fr] md:gap-16">
+            <div className="hidden h-full w-px self-stretch bg-ink/15 md:block" />
+            <div className="max-w-2xl">
+              <p className="font-display text-2xl leading-snug text-ink italic sm:text-3xl">
+                « Un institut pensé comme une parenthèse — où chaque geste, chaque silence,
+                a sa raison d&apos;être. »
+              </p>
+              <p className="mt-6 text-sm leading-relaxed text-ink-soft">
+                {siteConfig.name} associe les techniques d&apos;esthétique traditionnelles aux
+                rituels capillaires japonais et aux massages du monde, dans un cadre pensé
+                pour ralentir le temps.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </Section>
+
+      {/* SIGNATURE SERVICES */}
+      <Section className="py-24 md:py-28">
+        <Reveal>
+          <Kicker>Nos rituels signature</Kicker>
+          <h2 className="mt-4 font-display text-4xl text-ink md:text-5xl">Les préférés</h2>
+        </Reveal>
+
+        <div className="mt-12 divide-y divide-ink/10 border-t border-ink/10">
+          {featured.map((service, i) => (
+            <Reveal key={service.slug} delay={i * 80}>
+              <Link
+                href={`/reserver?service=${service.slug}`}
+                className="group flex flex-col gap-2 py-7 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              >
+                <div className="flex items-baseline gap-4">
+                  <span className="font-display text-sm text-clay">0{i + 1}</span>
+                  <span className="font-display text-2xl text-ink transition-colors group-hover:text-clay md:text-[1.7rem]">
+                    {service.name}
+                  </span>
+                </div>
+                <p className="max-w-md text-sm text-ink-soft sm:text-right">{service.shortDesc}</p>
+                <div className="flex shrink-0 items-center gap-4 text-sm text-ink-soft">
+                  <span>{formatDuration(service.durationMin)}</span>
+                  <span className="text-ink">{formatPrice(service.priceCents)}</span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <Link
+            href="/prestations"
+            className="mt-10 inline-flex items-center gap-2 text-sm tracking-wide text-ink underline decoration-clay/50 underline-offset-4 hover:text-clay"
+          >
+            Voir toutes les prestations →
+          </Link>
+        </Reveal>
+      </Section>
+
+      {/* THREE PILLARS */}
+      <Section tone="ink" className="py-24 md:py-28">
+        <Reveal>
+          <Kicker light>Trois univers</Kicker>
+        </Reveal>
+        <div className="mt-10 grid gap-12 sm:grid-cols-3">
+          {[
+            { icon: <LeafIcon />, title: "Esthétique", text: "Soins du visage sur-mesure pour une peau saine et lumineuse.", href: "/prestations#esthetique" },
+            { icon: <RippleIcon />, title: "Head Spa", text: "Rituel capillaire japonais, massage crânien et exfoliation du cuir chevelu.", href: "/prestations#head-spa" },
+            { icon: <HandsIcon />, title: "Massage", text: "Modelages du monde pour relâcher les tensions en profondeur.", href: "/prestations#massage" },
+          ].map((pillar, i) => (
+            <Reveal key={pillar.title} delay={i * 100}>
+              <Link href={pillar.href} className="group block text-cream">
+                <div className="text-gold">{pillar.icon}</div>
+                <h3 className="mt-5 font-display text-2xl">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-cream/70">{pillar.text}</p>
+                <span className="mt-4 inline-block text-xs tracking-[0.2em] text-cream/50 uppercase transition-colors group-hover:text-gold">
+                  Découvrir →
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* TESTIMONIALS */}
+      <Section className="py-24">
+        <Reveal>
+          <Kicker>Ils en parlent mieux que nous</Kicker>
+        </Reveal>
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
+          {[
+            { quote: "Un moment hors du temps. Le massage crânien est à lui seul une raison de revenir chaque mois.", name: "Camille R." },
+            { quote: "Le soin du visage signature a transformé ma peau en trois séances. L'accueil est d'une douceur rare.", name: "Sarah B." },
+            { quote: "Le head spa luxe est une expérience à part entière — je ressors flottante.", name: "Inès M." },
+          ].map((t, i) => (
+            <Reveal key={t.name} delay={i * 100} className="rounded-2xl border border-ink/10 bg-paper p-7">
+              <p className="font-display text-3xl leading-none text-clay">“</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t.quote}</p>
+              <p className="mt-5 text-xs tracking-wide text-ink uppercase">{t.name}</p>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* PRACTICAL INFO / CTA */}
+      <Section tone="deep" className="py-24">
+        <Reveal>
+          <div className="grid gap-12 rounded-3xl border border-ink/10 bg-paper p-10 md:grid-cols-[1fr_auto] md:items-center md:p-14">
+            <div>
+              <h2 className="font-display text-3xl text-ink md:text-4xl">
+                Offrez-vous une parenthèse.
+              </h2>
+              <div className="mt-6 grid gap-1 text-sm text-ink-soft sm:grid-cols-2 sm:gap-6">
+                <div>
+                  <p className="text-xs tracking-[0.2em] text-ink uppercase">Adresse</p>
+                  <p className="mt-1">{siteConfig.address.line1}, {siteConfig.address.postalCode} {siteConfig.address.city}</p>
+                </div>
+                <div>
+                  <p className="text-xs tracking-[0.2em] text-ink uppercase">Horaires</p>
+                  {siteConfig.hoursDisplay.map((h) => (
+                    <p key={h.label} className="mt-1">{h.label} — {h.value}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/reserver"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-ink px-9 py-4 text-sm tracking-wide text-cream transition-colors hover:bg-clay"
+            >
+              Réserver maintenant
+            </Link>
+          </div>
+        </Reveal>
+      </Section>
+    </>
   );
 }
