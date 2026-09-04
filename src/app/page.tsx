@@ -1,10 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getFeaturedServices } from "@/lib/services";
 import { siteConfig } from "@/lib/site-config";
 import { formatDuration, formatPrice } from "@/lib/format";
 import { Section, Kicker } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { LeafIcon, RippleIcon, HandsIcon } from "@/components/icons";
 
 export default function HomePage() {
   const featured = getFeaturedServices(4);
@@ -45,13 +45,16 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal as="div" delay={150} className="relative mx-auto w-full max-w-sm">
-            <div
-              className="aspect-[4/5] w-full rounded-t-[10rem] rounded-b-3xl border border-gold/40 shadow-[0_30px_60px_-25px_rgba(42,35,32,0.35)]"
-              style={{
-                background:
-                  "linear-gradient(155deg, var(--color-forest) 0%, var(--color-ink) 55%, var(--color-clay-deep) 100%)",
-              }}
-            />
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[10rem] rounded-b-3xl border border-gold/40 shadow-[0_30px_60px_-25px_rgba(42,35,32,0.35)]">
+              <Image
+                src="/images/hero-facial-massage.jpg"
+                alt="Soin du visage prodigué dans une ambiance douce et feutrée"
+                fill
+                priority
+                sizes="(max-width: 768px) 320px, 384px"
+                className="object-cover"
+              />
+            </div>
             <div className="absolute -bottom-6 -left-6 rounded-2xl border border-ink/10 bg-paper px-6 py-4 shadow-lg">
               <p className="font-display text-2xl text-clay">9</p>
               <p className="text-xs tracking-wide text-ink-soft">rituels sur-mesure</p>
@@ -62,22 +65,33 @@ export default function HomePage() {
 
       {/* PHILOSOPHY */}
       <Section tone="deep" className="py-24">
-        <Reveal>
-          <div className="grid gap-10 md:grid-cols-[auto_1fr] md:gap-16">
-            <div className="hidden h-full w-px self-stretch bg-ink/15 md:block" />
-            <div className="max-w-2xl">
-              <p className="font-display text-2xl leading-snug text-ink italic sm:text-3xl">
-                « Un institut pensé comme une parenthèse — où chaque geste, chaque silence,
-                a sa raison d&apos;être. »
-              </p>
-              <p className="mt-6 text-sm leading-relaxed text-ink-soft">
-                {siteConfig.name} associe les techniques d&apos;esthétique traditionnelles aux
-                rituels capillaires japonais et aux massages du monde, dans un cadre pensé
-                pour ralentir le temps.
-              </p>
+        <div className="grid items-center gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+          <Reveal className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl md:mx-0">
+            <Image
+              src="/images/spa-ambiance.jpg"
+              alt="Bougies, serviettes et huiles préparées pour un rituel"
+              fill
+              sizes="(max-width: 768px) 300px, 360px"
+              className="object-cover"
+            />
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="grid gap-10 md:grid-cols-[auto_1fr] md:gap-10">
+              <div className="hidden h-full w-px self-stretch bg-ink/15 md:block" />
+              <div className="max-w-xl">
+                <p className="font-display text-2xl leading-snug text-ink italic sm:text-3xl">
+                  « Un institut pensé comme une parenthèse — où chaque geste, chaque silence,
+                  a sa raison d&apos;être. »
+                </p>
+                <p className="mt-6 text-sm leading-relaxed text-ink-soft">
+                  {siteConfig.name} associe les techniques d&apos;esthétique traditionnelles aux
+                  rituels capillaires japonais et aux massages du monde, dans un cadre pensé
+                  pour ralentir le temps.
+                </p>
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </Section>
 
       {/* SIGNATURE SERVICES */}
@@ -125,20 +139,29 @@ export default function HomePage() {
         <Reveal>
           <Kicker light>Trois univers</Kicker>
         </Reveal>
-        <div className="mt-10 grid gap-12 sm:grid-cols-3">
+        <div className="mt-10 grid gap-8 sm:grid-cols-3">
           {[
-            { icon: <LeafIcon />, title: "Esthétique", text: "Soins du visage sur-mesure pour une peau saine et lumineuse.", href: "/prestations#esthetique" },
-            { icon: <RippleIcon />, title: "Head Spa", text: "Rituel capillaire japonais, massage crânien et exfoliation du cuir chevelu.", href: "/prestations#head-spa" },
-            { icon: <HandsIcon />, title: "Massage", text: "Modelages du monde pour relâcher les tensions en profondeur.", href: "/prestations#massage" },
+            { image: "/images/esthetique-mask.jpg", title: "Esthétique", text: "Soins du visage sur-mesure pour une peau saine et lumineuse.", href: "/prestations#esthetique" },
+            { image: "/images/head-spa-massage.jpg", title: "Head Spa", text: "Rituel capillaire japonais, massage crânien et exfoliation du cuir chevelu.", href: "/prestations#head-spa" },
+            { image: "/images/massage-stones.jpg", title: "Massage", text: "Modelages du monde pour relâcher les tensions en profondeur.", href: "/prestations#massage" },
           ].map((pillar, i) => (
             <Reveal key={pillar.title} delay={i * 100}>
-              <Link href={pillar.href} className="group block text-cream">
-                <div className="text-gold">{pillar.icon}</div>
-                <h3 className="mt-5 font-display text-2xl">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-cream/70">{pillar.text}</p>
-                <span className="mt-4 inline-block text-xs tracking-[0.2em] text-cream/50 uppercase transition-colors group-hover:text-gold">
-                  Découvrir →
-                </span>
+              <Link href={pillar.href} className="group relative block aspect-[3/4] overflow-hidden rounded-2xl">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.title}
+                  fill
+                  sizes="(max-width: 640px) 90vw, 30vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/5" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <h3 className="font-display text-2xl text-cream">{pillar.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-cream/70">{pillar.text}</p>
+                  <span className="mt-4 inline-block text-xs tracking-[0.2em] text-cream/60 uppercase transition-colors group-hover:text-gold">
+                    Découvrir →
+                  </span>
+                </div>
               </Link>
             </Reveal>
           ))}

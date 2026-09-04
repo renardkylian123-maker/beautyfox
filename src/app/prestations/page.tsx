@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getServicesByCategory } from "@/lib/services";
 import { siteConfig } from "@/lib/site-config";
 import { categoryLabels, formatDuration, formatPrice } from "@/lib/format";
@@ -15,6 +16,12 @@ const categoryIntro: Record<string, string> = {
   esthetique: "Des soins du visage sur-mesure pour révéler l'éclat naturel de votre peau.",
   "head-spa": "Le rituel capillaire japonais, entre exfoliation du cuir chevelu et massage crânien.",
   massage: "Des modelages du monde pour relâcher les tensions et retrouver l'équilibre.",
+};
+
+const categoryImages: Record<string, string> = {
+  esthetique: "/images/esthetique-mask.jpg",
+  "head-spa": "/images/head-spa-massage.jpg",
+  massage: "/images/massage-stones.jpg",
 };
 
 export default function PrestationsPage() {
@@ -43,12 +50,21 @@ export default function PrestationsPage() {
           className="scroll-mt-24 py-16 md:py-20"
         >
           <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink/10 pb-6">
+            <div className="flex flex-col gap-6 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="font-display text-3xl text-ink md:text-4xl">
                   {categoryLabels[group.category]}
                 </h2>
                 <p className="mt-2 max-w-md text-sm text-ink-soft">{categoryIntro[group.category]}</p>
+              </div>
+              <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden rounded-xl sm:w-56">
+                <Image
+                  src={categoryImages[group.category]}
+                  alt={categoryLabels[group.category]}
+                  fill
+                  sizes="224px"
+                  className="object-cover"
+                />
               </div>
             </div>
           </Reveal>
