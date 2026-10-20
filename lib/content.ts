@@ -1,5 +1,12 @@
-// Placeholder interne en attendant le lien de réservation externe (plateforme tierce).
-export const RESERVATION_URL = "/contact";
+// Tous les CTA "Réserver" / "Prendre rendez-vous" pointent vers cette page,
+// qui intègre le module de réservation Planity (white-label).
+export const RESERVATION_URL = "/reservation";
+
+// Clé API Planity (white-label). Clé publique : elle est de toute façon visible
+// dans le code de la page côté navigateur.
+export const PLANITY_API_KEY = "-P0S7R2P8OJfwYaA9ef_";
+// Couleur d'accent du module (= `clay` dans globals.css).
+export const PLANITY_PRIMARY_COLOR = "#bf6b3a";
 
 export const SITE_NAME = "Beauty Fox";
 export const SITE_TAGLINE = "Institut de beauté & bien-être";
@@ -35,6 +42,13 @@ export const about = {
     "Beauty Fox est avant tout un clin d'œil à mon nom de famille. Une façon d'emporter avec moi un petit morceau de cette famille unie qui m'est chère et qui m'accompagne et me soutient dans mes projets.",
     "Derrière ce nom se trouve donc quelque chose de très personnel : mes racines, mais aussi le début d'une nouvelle aventure qui me tient profondément à cœur.",
   ],
+};
+
+export const reservation = {
+  kicker: "Réservation",
+  title: "Réserver un soin",
+  intro:
+    "Choisissez votre soin, votre créneau, et réservez en quelques clics. Un moment pour vous, simplement.",
 };
 
 export const contact = {
