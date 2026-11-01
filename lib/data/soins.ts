@@ -216,7 +216,7 @@ export const headspa: Categorie = {
 export const footspa: Categorie = {
   slug: "footspa",
   titre: "FootSpa",
-  image: "/soins/footspa-1.jpg",
+  image: "/soins/footspa-centre.jpg",
   soins: [
     {
       nom: "FootSpa découverte",
