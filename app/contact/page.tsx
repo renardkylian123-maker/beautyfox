@@ -3,7 +3,7 @@ import Link from "next/link";
 import { RESERVATION_URL, contact } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Contact — Beauty Fox",
+  title: "Contact",
   description: contact.intro,
 };
 

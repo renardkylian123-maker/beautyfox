@@ -9,7 +9,10 @@ export default function SoinsListe({ soins }: { soins: Soin[] }) {
           className="flex items-baseline justify-between gap-4 py-4"
         >
           <h3 className="font-serif text-base text-ink">{soin.nom}</h3>
-          <span className="font-serif text-lg text-clay">{soin.prix}</span>
+          <span className="flex items-baseline gap-3">
+            <span className="text-xs text-ink/50">{soin.duree}</span>
+            <span className="font-serif text-lg text-clay">{soin.prix}</span>
+          </span>
         </li>
       ))}
     </ul>

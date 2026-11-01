@@ -70,7 +70,7 @@ function SoinsCategorieImageUnique({
 }
 
 export const metadata: Metadata = {
-  title: "Nos soins — Beauty Fox",
+  title: "Nos soins",
   description:
     "Catalogue complet des soins Beauty Fox : soins corps, soins visage, épilations, headspa et footspa.",
 };

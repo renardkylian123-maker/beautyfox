@@ -3,7 +3,7 @@ import PlanityWidget from "@/components/PlanityWidget";
 import { reservation } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Réservation — Beauty Fox",
+  title: "Réservation",
   description: reservation.intro,
 };
 

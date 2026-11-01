@@ -20,7 +20,10 @@ export default function CategorieImageUnique({
                 {soin.description}
               </p>
             )}
-            <p className="mt-6 font-serif text-xl text-clay">{soin.prix}</p>
+            <div className="mt-6 flex items-baseline gap-3">
+              <p className="font-serif text-xl text-clay">{soin.prix}</p>
+              <span className="text-sm text-ink/50">{soin.duree}</span>
+            </div>
           </div>
         ))}
       </div>

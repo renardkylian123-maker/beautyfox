@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { about } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "À propos — Beauty Fox",
+  title: "À propos",
   description: about.intro[0],
 };
 

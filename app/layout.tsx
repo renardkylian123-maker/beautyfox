@@ -17,13 +17,41 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
+const SITE_TITLE = "Beauty Fox — Institut de beauté & bien-être";
+const SITE_DESCRIPTION =
+  "Un moment pour soi, simplement. Soins corps, soins visage, épilations, headspa et footspa dans un institut pensé comme une parenthèse dans le quotidien.";
+
 export const metadata: Metadata = {
-  title: "Beauty Fox — Institut de beauté & bien-être",
-  description:
-    "Beauty Fox, institut de beauté et bien-être : un moment pour soi, simplement. Soins corps, visage, épilations, headspa et footspa.",
+  metadataBase: new URL("https://beautyfox.vercel.app"),
+  title: {
+    default: SITE_TITLE,
+    template: "%s — Beauty Fox",
+  },
+  description: SITE_DESCRIPTION,
   icons: {
     icon: "/logo.jpg",
     apple: "/logo.jpg",
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: "Beauty Fox",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 1254,
+        height: 1254,
+        alt: "Beauty Fox — institut de beauté",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/logo.jpg"],
   },
 };
 
