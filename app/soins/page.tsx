@@ -9,6 +9,7 @@ import {
 } from "@/lib/data/soins";
 import SoinsListe from "@/components/SoinsListe";
 import SoinFeature from "@/components/SoinFeature";
+import CategorieImageUnique from "@/components/CategorieImageUnique";
 import { BlobDecor } from "@/components/Decor";
 import type { Categorie } from "@/lib/data/soins";
 
@@ -16,28 +17,12 @@ function bgClass(index: number) {
   return index % 2 === 0 ? "bg-paper" : "bg-sand";
 }
 
-const IMAGES_CORPS = [
-  "/soins/corps-1.jpg",
-  "/soins/corps-2.jpg",
-  "/soins/corps-3.jpg",
-  "/soins/corps-4.jpg",
-];
-const IMAGES_VISAGE = [
-  "/soins/visage-1.jpg",
-  "/soins/visage-2.jpg",
-  "/soins/visage-3.jpg",
-];
-const IMAGES_HEADSPA = ["/soins/headspa-1.jpg", "/soins/headspa-2.jpg"];
-const IMAGES_FOOTSPA = ["/soins/footspa-1.jpg", "/soins/footspa-2.jpg"];
-
 function SoinsCategorie({
   categorie,
   index,
-  images,
 }: {
   categorie: Categorie;
   index: number;
-  images: string[];
 }) {
   return (
     <section
@@ -54,10 +39,31 @@ function SoinsCategorie({
               key={`${soin.nom}-${i}`}
               soin={soin}
               reverse={i % 2 === 1}
-              imageSrc={images[i % images.length]}
             />
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function SoinsCategorieImageUnique({
+  categorie,
+  index,
+}: {
+  categorie: Categorie;
+  index: number;
+}) {
+  return (
+    <section
+      id={categorie.slug}
+      className={`scroll-mt-28 border-b border-stone ${bgClass(index)}`}
+    >
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <h2 className="mb-10 font-serif text-2xl text-ink md:text-3xl">
+          {categorie.titre}
+        </h2>
+        <CategorieImageUnique categorie={categorie} />
       </div>
     </section>
   );
@@ -88,12 +94,8 @@ export default function SoinsPage() {
         </div>
       </section>
 
-      <SoinsCategorie categorie={soinsCorps} index={0} images={IMAGES_CORPS} />
-      <SoinsCategorie
-        categorie={soinsVisage}
-        index={1}
-        images={IMAGES_VISAGE}
-      />
+      <SoinsCategorie categorie={soinsCorps} index={0} />
+      <SoinsCategorie categorie={soinsVisage} index={1} />
 
       <section
         id="epilations"
@@ -121,16 +123,8 @@ export default function SoinsPage() {
         </div>
       </section>
 
-      <SoinsCategorie
-        categorie={headspa}
-        index={3}
-        images={IMAGES_HEADSPA}
-      />
-      <SoinsCategorie
-        categorie={footspa}
-        index={4}
-        images={IMAGES_FOOTSPA}
-      />
+      <SoinsCategorieImageUnique categorie={headspa} index={3} />
+      <SoinsCategorieImageUnique categorie={footspa} index={4} />
     </>
   );
 }
