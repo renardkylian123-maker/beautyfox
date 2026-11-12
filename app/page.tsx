@@ -54,10 +54,10 @@ export default function HomePage() {
             <div className="absolute -bottom-4 -right-4 h-full w-full bg-clay/25" />
             <div className="relative aspect-[4/5] w-full overflow-hidden shadow-lg shadow-ink/10">
               <Image
-                src="/image1.jpg"
-                alt="Institut Beauty Fox"
+                src="/accueil-porte.jpg"
+                alt="Entrée de l'institut Beauty Fox"
                 fill
-                className="scale-110 object-cover"
+                className="object-cover"
                 priority
               />
             </div>

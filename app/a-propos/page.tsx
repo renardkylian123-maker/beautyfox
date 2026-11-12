@@ -13,8 +13,8 @@ export default function AProposPage() {
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2 md:items-start md:py-32">
         <div className="relative aspect-[4/5] w-full overflow-hidden md:sticky md:top-28">
           <Image
-            src="/image1.jpg"
-            alt="Chloé, fondatrice de Beauty Fox"
+            src="/a-propos-salle.jpg"
+            alt="Salle de soin de l'institut Beauty Fox"
             fill
             className="object-cover"
             priority
